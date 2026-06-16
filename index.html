@@ -1,153 +1,33 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Image Generator</title>
-<style>
-  body {
-    font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
-    background: #0b1020;
-    color: #e5e7eb;
-    padding: 20px;
-  }
-
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  input[type=text] {
-    display: block;
-    margin: 0 auto 10px auto;
-    width: 80%;
-    max-width: 400px;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    text-align: center;
-  }
-
-  button {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    background: #22d3ee;
-    color: #000;
-    cursor: pointer;
-    font-weight: 600;
-    transition: transform .1s ease;
-  }
-
-  button:active {
-    transform: translateY(2px);
-  }
-
-  .img-container {
-    position: relative;
-    margin-top: 20px;
-    width: 90%;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  img {
-    width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px #22d3ee33;
-    display: none;
-  }
-
-  .download-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 6px 12px;
-    border-radius: 6px;
-    background: #22d3eecc;
-    color: #000;
-    font-weight: 600;
-    cursor: pointer;
-    display: none;
-    transition: background .2s;
-  }
-
-  .download-btn:hover {
-    background: #22d3ee;
-  }
-
-  footer {
-    text-align: center;
-    font-size: 12px;
-    padding: 8px;
-    border-radius: 6px;
-  }
-
-  .note-footer {
-    background: #1f2937;
-    color: #e5e7eb;
-    margin-top: auto;  /* pastga tortadi */
-  }
-
-  .owner-footer {
-    background: #111827;
-    color: #22d3ee;
-    margin-top: 2px;   /* ikkinchi footer bilan 2px bo‘shliq */
-  }
-
-  @media (max-width: 480px) {
-    input[type=text] { width: 95%; }
-    .img-container { max-width: 100%; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Generator | Professional Studio</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<h1>AI Image Generator</h1>
-<input type="text" id="prompt" placeholder="Matn kiriting...">
-<button id="generate">Generatsiya qilish</button>
 
-<div class="img-container">
-  <img id="result" alt="Rasm chiqadi">
-  <button class="download-btn" id="download">Download</button>
-</div>
+    <main class="container">
+        <header>
+            <h1>AI Vision Studio</h1>
+            <p>Transform your imagination into high-quality imagery.</p>
+        </header>
 
-<footer class="note-footer">Eslatma: Saytga so'rov yuborib kelgunicha sekinlashishi mumkin!</footer>
-<footer class="owner-footer">Owner: Murodbek Tuychiyev</footer>
+        <div class="input-section">
+            <input type="text" id="prompt" placeholder="Enter your creative prompt here...">
+            <button id="generate">Generate</button>
+        </div>
 
-<script>
-const btn = document.getElementById("generate");
-const img = document.getElementById("result");
-const downloadBtn = document.getElementById("download");
+        <div class="result-section">
+            <div id="loader" class="loader"></div>
+            <img id="result" alt="Generated AI Image">
+            <button class="download-btn" id="download">Download Image</button>
+        </div>
+    </main>
 
-btn.addEventListener("click", ()=> {
-    const prompt = document.getElementById("prompt").value.trim();
-    if(!prompt){ alert("Matn kiriting"); return; }
-    
-    const seed = Math.floor(Math.random()*1000000);
-    const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?seed=${seed}`;
-    
-    img.src = url;
-    img.style.display = "block";
-
-    img.onload = () => {
-        downloadBtn.style.display = "block";
-    };
-
-    downloadBtn.onclick = () => {
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = "AI_Image.png";
-        a.click();
-    };
-});
-</script>
+    <script src="script.js"></script>
 </body>
 </html>
