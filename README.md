@@ -17,4 +17,4 @@ A modern, fast, and minimalist AI-powered image generator built for the **NASA S
 ## 🚀 How to Run
 1. Clone this repository:
    ```bash
-   git clone [https://github.com/yourusername/ai-vision-studio.git](https://github.com/yourusername/ai-vision-studio.git)
+   git clone [https://github.com/Murodbektuychiyev/AI_Image_Generator.git](https://github.com/Murodbektuychiyev/AI_Image_Generator.git)
