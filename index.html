@@ -1,36 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Image Generator | Professional Studio</title>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AI Vision Studio | Professional Edition</title>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+</html>
 
-    <!-- CSS Part -->
-    <link rel="stylesheet" href="style.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-</head>
 <body>
-
     <main class="container">
         <header>
             <h1>AI Vision Studio</h1>
-            <p>Transform your imagination into high-quality imagery.</p>
+            <p>Transform your imagination into high-quality imagery instantly.</p>
         </header>
 
-        <div class="input-section">
-            <input type="text" id="prompt" placeholder="Enter your creative prompt here...">
-            <button id="generate">Generate</button>
+        <!-- QoL 1 & 2: Enhancers & Controls -->
+        <div class="controls-wrapper">
+            <div class="input-section">
+                <input type="text" id="prompt" placeholder="Describe what you want to see...">
+                <button id="generate">Generate</button>
+            </div>
+
+            <div class="options-section">
+                <div class="option-group">
+                    <label for="aspect-ratio">Aspect Ratio:</label>
+                    <select id="aspect-ratio">
+                        <option value="1:1">Square (1:1)</option>
+                        <option value="16:9">Landscape (16:9)</option>
+                        <option value="9:16">Portrait (9:16)</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label>Enhance Style:</label>
+                    <div class="style-tags">
+                        <button class="style-tag" data-style="photorealistic, 8k resolution, highly detailed">📸 Realistic</button>
+                        <button class="style-tag" data-style="cyberpunk style, neon lighting, futuristic">🌆 Cyberpunk</button>
+                        <button class="style-tag" data-style="anime style, vibrant colors, studio ghibli aesthetic">🎨 Anime</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
+        <!-- Result Display -->
         <div class="result-section">
             <div id="loader" class="loader"></div>
-            <img id="result" alt="Generated AI Image">
+            <div class="image-wrapper">
+                <img id="result" alt="Your AI masterpiece will appear here">
+            </div>
             <button class="download-btn" id="download">Download Image</button>
         </div>
+
+        <!-- QoL 3: History Section -->
+        <section class="history-section">
+            <h2>Recent Generations</h2>
+            <div id="history-gallery" class="history-gallery">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </section>
     </main>
 
-    <!-- JavaScript Part -->
     <script src="script.js"></script>
 </body>
-</html>
