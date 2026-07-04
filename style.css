@@ -1,4 +1,4 @@
-/* 1. Global Reset & Body Styling */
+/* --- Base Styles --- */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: #050505; /* Chuqur qora fon */
+    background: #050505;
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -17,8 +17,7 @@ body {
     background-image: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #050505 70%);
 }
 
-/* 2. Main Wrapper - Glassmorphism Card */
-.container {
+.app-container {
     width: 100%;
     max-width: 700px;
     background: rgba(255, 255, 255, 0.03);
@@ -30,11 +29,11 @@ body {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
 }
 
-header {
+.main-header {
     text-align: center;
 }
 
-header h1 {
+.main-header h1 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 12px;
@@ -44,37 +43,36 @@ header h1 {
     -webkit-text-fill-color: transparent;
 }
 
-header p {
+.main-header p {
     color: #94a3b8;
     margin-bottom: 30px;
     font-size: 0.95rem;
 }
 
-/* Controls Wrapper */
-.controls-wrapper {
+/* --- Controls & Form --- */
+.generator-box {
     display: flex;
     flex-direction: column;
     gap: 20px;
     margin-bottom: 30px;
 }
 
-/* 3. Input Section Styling */
-.input-section {
+.search-bar {
     display: flex;
     gap: 12px;
     background: rgba(0, 0, 0, 0.4);
     padding: 8px;
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.input-section:focus-within {
+.search-bar:focus-within {
     border-color: #3b82f6;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
-input {
+.search-bar input {
     flex: 1;
     background: transparent;
     border: none;
@@ -84,11 +82,11 @@ input {
     outline: none;
 }
 
-input::placeholder {
+.search-bar input::placeholder {
     color: #475569;
 }
 
-button {
+.search-bar button {
     background: #3b82f6;
     color: white;
     border: none;
@@ -96,23 +94,23 @@ button {
     border-radius: 12px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
-button:hover {
+.search-bar button:hover {
     background: #2563eb;
     transform: translateY(-1px);
 }
 
-button:disabled {
+.search-bar button:disabled {
     background: #1e293b;
     color: #64748b;
     cursor: not-allowed;
     transform: none;
 }
 
-/* Options & Enhancers (QoL 1 & 2) */
-.options-section {
+/* --- Options Section --- */
+.settings-grid {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -122,7 +120,7 @@ button:disabled {
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.option-group {
+.control-group {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -130,13 +128,13 @@ button:disabled {
     flex-wrap: wrap;
 }
 
-.option-group label {
+.control-group label {
     font-size: 0.9rem;
     color: #cbd5e1;
     font-weight: 500;
 }
 
-select {
+.control-group select {
     background: #0f172a;
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -147,12 +145,12 @@ select {
     font-size: 0.9rem;
 }
 
-.style-tags {
+.tags-container {
     display: flex;
     gap: 8px;
 }
 
-.style-tag {
+.style-btn {
     background: rgba(255, 255, 255, 0.05);
     color: #94a3b8;
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -160,24 +158,24 @@ select {
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 500;
-    transform: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
 }
 
-.style-tag:hover {
+.style-btn:hover {
     background: rgba(255, 255, 255, 0.1);
     color: white;
-    transform: none;
 }
 
-.style-tag.active {
+.style-btn.selected {
     background: linear-gradient(135deg, #3b82f6, #8b5cf6);
     color: white;
     border-color: transparent;
     box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
 }
 
-/* 4. Result & Image Frame Styling */
-.result-section {
+/* --- Output Display --- */
+.output-box {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -185,14 +183,14 @@ select {
     width: 100%;
 }
 
-.image-wrapper {
+.image-box {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-img {
+.image-box img {
     max-width: 100%;
     max-height: 500px;
     object-fit: contain;
@@ -200,90 +198,72 @@ img {
     display: none;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-    animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: renderEffect 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.download-btn {
+.btn-download {
     display: none;
     margin-top: 20px;
     background: transparent;
     border: 1px solid #10b981;
     color: #10b981;
     width: 100%;
+    padding: 12px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
 }
 
-.download-btn:hover {
+.btn-download:hover {
     background: #10b981;
     color: white;
 }
 
-/* 5. QoL 3: Recent Generations Gallery */
-.history-section {
+/* --- Saved Art History --- */
+.gallery-box {
     margin-top: 40px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding-top: 30px;
     text-align: left;
 }
 
-.history-section h2 {
+.gallery-box h2 {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 16px;
     color: #cbd5e1;
 }
 
-.history-gallery {
+.gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
 }
 
-.history-card {
+.gallery-item {
     position: relative;
     aspect-ratio: 1 / 1;
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.05);
     background: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
-.history-card img {
+.gallery-item:hover {
+    transform: scale(1.03);
+}
+
+.gallery-item img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    animation: none;
 }
 
-.history-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-.history-card:hover .history-overlay {
-    opacity: 1;
-}
-
-.history-overlay button {
-    padding: 6px 16px;
-    font-size: 0.8rem;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.history-overlay button:hover {
-    background: white;
-    color: black;
-}
-
-.no-history {
+.empty-text {
     grid-column: span 3;
     color: #475569;
     font-size: 0.9rem;
@@ -292,12 +272,7 @@ img {
     padding: 20px 0;
 }
 
-/* 6. Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.98) translateY(10px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
+/* --- Status Elements & Keyframes --- */
 .loader {
     width: 40px;
     height: 40px;
@@ -305,20 +280,25 @@ img {
     border-bottom-color: #3b82f6;
     border-radius: 50%;
     display: none;
-    animation: rotation 0.8s linear infinite;
+    animation: spinEffect 0.8s linear infinite;
     margin: 30px 0;
 }
 
-@keyframes rotation {
+@keyframes renderEffect {
+    from { opacity: 0; transform: scale(0.98) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes spinEffect {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
-/* Responsive Overrides */
+/* --- Responsiveness --- */
 @media (max-width: 600px) {
-    .container { padding: 24px; }
-    .history-gallery { grid-template-columns: repeat(2, 1fr); }
-    .no-history { grid-column: span 2; }
-    .style-tags { width: 100%; justify-content: space-between; }
-    .style-tag { flex: 1; text-align: center; padding: 6px 4px; font-size: 0.75rem; }
+    .app-container { padding: 24px; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .empty-text { grid-column: span 2; }
+    .tags-container { width: 100%; justify-content: space-between; }
+    .style-btn { flex: 1; text-align: center; padding: 6px 4px; font-size: 0.75rem; }
 }
